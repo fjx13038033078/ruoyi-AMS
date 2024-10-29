@@ -1,5 +1,5 @@
 
-# TOS（Tea Online Sales的缩写）
+# 二手商品交易网站  SGT（Second-hand goods trading的缩写）
 
 ## 内置功能
 
