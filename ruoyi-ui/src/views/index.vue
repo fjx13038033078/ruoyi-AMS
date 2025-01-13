@@ -1,8 +1,5 @@
 <template>
   <div>
-<!--    <div id="curtain">-->
-<!--      <h1 data-heading="管">茶商城管理系统</h1>-->
-<!--    </div>-->
     <div id="curtain" style="width: 100%; height: 100px">
       <el-row justify="center" align="middle" style="height: 100px" class="background-title">
         <el-col :span="24">
@@ -45,8 +42,7 @@
   </div>
 </template>
 <script>
-import {listNotice, getNotice} from "@/api/system/notice";
-import * as echarts from 'echarts'
+import {listNotice} from "@/api/system/notice";
 
 
 export default {
@@ -102,7 +98,7 @@ export default {
     this.getList();
   },
   mounted() {
-    this.initVenueCourtChart(); // 初始化 echarts 柱状图
+
   },
   methods: {
     /** 查询公告列表 */
@@ -114,39 +110,6 @@ export default {
         this.loading = false;
       });
     },
-    // 获取场馆场地数量映射的数据并更新到图表中
-    fetchVenueCourtMapData() {
-      getVenueCourtCountMap().then(response => {
-        this.venueCourtMapData = response.data;
-        this.updateVenueCourtChart(); // 获取到数据后更新图表
-      });
-    },
-    // 初始化 echarts 柱状图
-    initVenueCourtChart() {
-      this.venueCourtChart = echarts.init(document.getElementById("venueCourtChart"));
-      this.fetchVenueCourtMapData(); // 获取数据并更新图表
-    },
-    // 更新 echarts 柱状图
-    updateVenueCourtChart() {
-      // 使用获取到的数据更新图表
-      const venueNames = Object.keys(this.venueCourtMapData);
-      const courtCounts = Object.values(this.venueCourtMapData);
-      const option = {
-        // echarts 配置项
-        xAxis: {
-          type: "category",
-          data: venueNames
-        },
-        yAxis: {
-          type: "value"
-        },
-        series: [{
-          data: courtCounts,
-          type: "bar"
-        }]
-      };
-      this.venueCourtChart.setOption(option);
-    }
   }
 };
 </script>
