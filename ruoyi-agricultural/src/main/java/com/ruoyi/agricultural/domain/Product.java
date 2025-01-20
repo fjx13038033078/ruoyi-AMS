@@ -37,6 +37,17 @@ public class Product implements Serializable {
     private String userName;
 
     /**
+     * 商家ID（外键，关联users表）
+     */
+    private Long merchantId;
+
+    /**
+     * 商家名称
+     */
+    @TableField(exist = false)
+    private String merchantName;
+
+    /**
      * 分类ID（外键，关联分类表）
      */
     private Long categoryId;
@@ -71,6 +82,11 @@ public class Product implements Serializable {
      * 产品状态（1:在售，0:下架）
      */
     private Integer status;
+
+    /**
+     * 产品图片
+     */
+    private String image;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

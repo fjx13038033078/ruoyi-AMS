@@ -1,16 +1,14 @@
-package com.ruoyi.agricultural.mapper;
+package com.ruoyi.agricultural.service;
 
 import com.ruoyi.agricultural.domain.Order;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * @Author 范佳兴
- * @date 2025/1/20 10:17
+ * @date 2025/1/20 11:16
  */
-@Mapper
-public interface OrderMapper {
+public interface OrderService {
     /**
      * 根据用户ID获取用户的所有订单
      *
@@ -18,14 +16,6 @@ public interface OrderMapper {
      * @return 用户的订单列表
      */
     List<Order> listOrdersByUserId(Long userId);
-
-    /**
-     * 根据商家ID获取商家的所有订单
-     *
-     * @param merchantId 商家ID
-     * @return 商家的订单列表
-     */
-    List<Order> listOrdersByMerchantId(Long merchantId);
 
     /**
      * 根据订单ID获取订单信息
@@ -39,25 +29,25 @@ public interface OrderMapper {
      * 添加订单
      *
      * @param order 待添加的订单信息
-     * @return 添加成功返回影响的行数，否则返回 0
+     * @return 添加成功返回 true，否则返回 false
      */
-    int addOrder(Order order);
+    boolean addOrder(Order order);
 
     /**
      * 更新订单信息
      *
      * @param order 待更新的订单信息
-     * @return 更新成功返回影响的行数，否则返回 0
+     * @return 更新成功返回 true，否则返回 false
      */
-    int updateOrder(Order order);
+    boolean updateOrder(Order order);
 
     /**
      * 删除订单
      *
      * @param orderId 待删除的订单ID
-     * @return 删除成功返回影响的行数，否则返回 0
+     * @return 删除成功返回 true，否则返回 false
      */
-    int deleteOrder(Long orderId);
+    boolean deleteOrder(Long orderId);
 
     /**
      * 根据订单状态获取订单列表

@@ -65,4 +65,12 @@ public interface ProductMapper {
      * @return 用户的产品列表
      */
     List<Product> getProductsByUserId(Long userId);
+
+    /**
+     * 根据商户ID查询产品列表
+     *
+     * @param merchantId 商户ID
+     * @return 商户的产品列表
+     */
+    List<Product> getProductByMerchantId(Long merchantId);
 }

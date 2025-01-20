@@ -38,6 +38,17 @@ public class Order implements Serializable {
     private String userName;
 
     /**
+     * 商家ID（外键，关联users表）
+     */
+    private Long merchantId;
+
+    /**
+     * 商家名称
+     */
+    @TableField(exist = false)
+    private String merchantName;
+
+    /**
      * 产品ID（外键，关联products表）
      */
     private Long productId;

@@ -6,6 +6,7 @@
     <resultMap type="com.ruoyi.agricultural.domain.Order" id="OrderResultMap">
         <id property="orderId" column="order_id"/>
         <result property="userId" column="user_id"/>
+        <result property="merchantId" column="merchant_id"/>
         <result property="productId" column="product_id"/>
         <result property="quantity" column="quantity"/>
         <result property="price" column="price"/>
@@ -18,6 +19,11 @@
         SELECT * FROM ams_orders WHERE user_id = #{userId}
     </select>
 
+    <!-- 根据商家ID查询订单 -->
+    <select id="listOrdersByMerchantId" parameterType="long" resultMap="OrderResultMap">
+        SELECT * FROM ams_orders WHERE merchant_id = #{merchantId}
+    </select>
+
     <!-- 根据订单ID获取订单信息 -->
     <select id="getOrderById" parameterType="long" resultMap="OrderResultMap">
         SELECT * FROM ams_orders WHERE order_id = #{orderId}
@@ -25,8 +31,8 @@
 
     <!-- 添加订单 -->
     <insert id="addOrder" parameterType="com.ruoyi.agricultural.domain.Order">
-        INSERT INTO ams_orders (user_id, product_id, quantity, price, total_amount, status)
-        VALUES (#{userId}, #{productId}, #{quantity}, #{price}, #{totalAmount}, #{status})
+        INSERT INTO ams_orders (user_id, merchant_id, product_id, quantity, price, total_amount, status)
+        VALUES (#{userId}, #{merchantId}, #{productId}, #{quantity}, #{price}, #{totalAmount}, #{status})
     </insert>
 
     <!-- 更新订单信息 -->
