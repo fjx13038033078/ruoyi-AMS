@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agricultural.mapper.OrderMapper">
+
+    <!-- 定义结果映射 -->
+    <resultMap type="com.ruoyi.agricultural.domain.Order" id="OrderResultMap">
+        <id property="orderId" column="order_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="quantity" column="quantity"/>
+        <result property="price" column="price"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <!-- 根据用户ID获取用户的所有订单 -->
+    <select id="listOrdersByUserId" parameterType="long" resultMap="OrderResultMap">
+        SELECT * FROM ams_orders WHERE user_id = #{userId}
+    </select>
+
+    <!-- 根据订单ID获取订单信息 -->
+    <select id="getOrderById" parameterType="long" resultMap="OrderResultMap">
+        SELECT * FROM ams_orders WHERE order_id = #{orderId}
+    </select>
+
+    <!-- 添加订单 -->
+    <insert id="addOrder" parameterType="com.ruoyi.agricultural.domain.Order">
+        INSERT INTO ams_orders (user_id, product_id, quantity, price, total_amount, status)
+        VALUES (#{userId}, #{productId}, #{quantity}, #{price}, #{totalAmount}, #{status})
+    </insert>
+
+    <!-- 更新订单信息 -->
+    <update id="updateOrder" parameterType="com.ruoyi.agricultural.domain.Order">
+        UPDATE ams_orders
+        SET product_id = #{productId}, quantity = #{quantity}, price = #{price}, total_amount = #{totalAmount}, status = #{status}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <!-- 删除订单 -->
+    <delete id="deleteOrder" parameterType="long">
+        DELETE FROM ams_orders WHERE order_id = #{orderId}
+    </delete>
+
+    <!-- 根据订单状态获取订单列表 -->
+    <select id="listOrdersByStatus" parameterType="int" resultMap="OrderResultMap">
+        SELECT * FROM ams_orders WHERE status = #{status}
+    </select>
+
+</mapper>

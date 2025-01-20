@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agricultural.mapper.CartMapper">
+
+    <resultMap type="com.ruoyi.agricultural.domain.Cart" id="CartResultMap">
+        <id property="cartId" column="cart_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="productId" column="product_id"/>
+    </resultMap>
+
+    <!-- 获取用户的购物车列表 -->
+    <select id="getCartByUserId" parameterType="long" resultMap="CartResultMap">
+        SELECT * FROM ams_cart WHERE user_id = #{userId}
+    </select>
+
+    <!-- 根据购物车ID查询购物车信息 -->
+    <select id="getCartById" parameterType="long" resultMap="CartResultMap">
+        SELECT * FROM ams_cart WHERE cart_id = #{cartId}
+    </select>
+
+    <!-- 添加商品到购物车 -->
+    <insert id="addToCart" parameterType="com.ruoyi.agricultural.domain.Cart">
+        INSERT INTO ams_cart (user_id, product_id)
+        VALUES (#{userId}, #{productId})
+    </insert>
+
+    <!-- 从购物车中删除商品 -->
+    <delete id="removeFromCart" parameterType="long">
+        DELETE FROM ams_cart WHERE cart_id = #{cartId}
+    </delete>
+
+    <!-- 删除用户购物车中的所有商品 -->
+    <delete id="clearCart" parameterType="long">
+        DELETE FROM ams_cart WHERE user_id = #{userId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agricultural.mapper.ProductMapper">
+
+    <resultMap type="com.ruoyi.agricultural.domain.Product" id="ProductResultMap">
+        <id property="productId" column="product_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="description" column="description"/>
+        <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <!-- 获取所有产品 -->
+    <select id="getAllProducts" resultMap="ProductResultMap">
+        SELECT * FROM ams_products
+    </select>
+
+    <!-- 根据产品ID查询产品信息 -->
+    <select id="getProductById" parameterType="long" resultMap="ProductResultMap">
+        SELECT * FROM ams_products WHERE product_id = #{productId}
+    </select>
+
+    <!-- 根据分类ID查询产品列表 -->
+    <select id="getProductsByCategoryId" parameterType="long" resultMap="ProductResultMap">
+        SELECT * FROM ams_products WHERE category_id = #{categoryId}
+    </select>
+
+    <!-- 根据用户ID查询产品列表 -->
+    <select id="getProductsByUserId" parameterType="long" resultMap="ProductResultMap">
+        SELECT * FROM ams_products WHERE user_id = #{userId}
+    </select>
+
+    <!-- 添加产品 -->
+    <insert id="addProduct" parameterType="com.ruoyi.agricultural.domain.Product">
+        INSERT INTO ams_products (user_id, category_id, product_name, description, price, stock, status)
+        VALUES (#{userId}, #{categoryId}, #{productName}, #{description}, #{price}, #{stock}, #{status})
+    </insert>
+
+    <!-- 更新产品信息 -->
+    <update id="updateProduct" parameterType="com.ruoyi.agricultural.domain.Product">
+        UPDATE ams_products
+        SET user_id = #{userId}, category_id = #{categoryId}, product_name = #{productName},
+            description = #{description}, price = #{price}, stock = #{stock}, status = #{status}
+        WHERE product_id = #{productId}
+    </update>
+
+    <!-- 删除产品 -->
+    <delete id="deleteProduct" parameterType="long">
+        DELETE FROM ams_products WHERE product_id = #{productId}
+    </delete>
+
+</mapper>

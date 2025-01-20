@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agricultural.mapper.CategoryMapper">
+
+    <resultMap type="com.ruoyi.agricultural.domain.Category" id="CategoryResultMap">
+        <id property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+    </resultMap>
+
+    <!-- 获取所有分类列表 -->
+    <select id="getAllCategories" resultMap="CategoryResultMap">
+        SELECT * FROM ams_categories
+    </select>
+
+    <!-- 根据分类ID查询分类信息 -->
+    <select id="getCategoryById" parameterType="long" resultMap="CategoryResultMap">
+        SELECT * FROM ams_categories WHERE category_id = #{categoryId}
+    </select>
+
+    <!-- 添加分类 -->
+    <insert id="addCategory" parameterType="com.ruoyi.agricultural.domain.Category">
+        INSERT INTO ams_categories (category_name)
+        VALUES (#{categoryName})
+    </insert>
+
+    <!-- 更新分类信息 -->
+    <update id="updateCategory" parameterType="com.ruoyi.agricultural.domain.Category">
+        UPDATE ams_categories SET category_name = #{categoryName}
+        WHERE category_id = #{categoryId}
+    </update>
+
+    <!-- 删除分类 -->
+    <delete id="deleteCategory" parameterType="long">
+        DELETE FROM ams_categories WHERE category_id = #{categoryId}
+    </delete>
+
+</mapper>
